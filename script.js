@@ -495,6 +495,14 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+// Calendly Integration
+function openCalendly() {
+    // Replace 'your-calendly-username' with your actual Calendly username
+    Calendly.initPopupWidget({
+        url: 'https://calendly.com/vantageviewtnt'
+    });
+}
+
 // Service Worker Registration for caching
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {

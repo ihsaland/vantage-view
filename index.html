@@ -31,7 +31,7 @@
     <!-- Preload Critical Resources -->
     <link rel="preload" href="styles.css" as="style">
     <link rel="preload" href="script.js" as="script">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" as="style" crossorigin>
     
     <!-- DNS Prefetch -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -39,11 +39,15 @@
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <!-- Web App Manifest -->
     <link rel="manifest" href="manifest.json">
+    
+    <!-- Calendly Widget -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
     
     <!-- Theme Color -->
     <meta name="theme-color" content="#000000">
@@ -98,8 +102,11 @@
                 </div>
             </div>
             <div class="hero-image">
-                <div class="hero-graphic">
+                <div class="hero-graphic" onclick="openCalendly()">
                     <i class="fas fa-calendar-alt"></i>
+                    <div class="calendar-overlay">
+                        <span>Book a Consultation</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -385,6 +392,14 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Send Message</button>
                     </form>
+                    <div class="calendly-section">
+                        <h4>Or Schedule a Call</h4>
+                        <p>Book a free consultation to discuss your event needs</p>
+                        <button onclick="openCalendly()" class="btn btn-secondary">
+                            <i class="fas fa-calendar-check"></i>
+                            Book Free Consultation
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
