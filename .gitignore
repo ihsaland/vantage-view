@@ -1,0 +1,42 @@
+# Ignore .zip files in Alcon Images directory
+ALCON Images/**/*.zip
+
+# Common files to ignore
+.DS_Store
+Thumbs.db
+*.log
+node_modules/
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp
+
+# Build and optimization files
+dist/
+build/
+*.min.css
+*.min.js
+*.map
+
+# Image optimization files (allow optimized images)
+# *-optimized.*
+*-compressed.*
+*-webp.*
+
+# Cache files
+.cache/
+.parcel-cache/
+
+# Service worker cache
+sw-cache/

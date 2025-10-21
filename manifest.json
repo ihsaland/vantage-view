@@ -1,0 +1,27 @@
+{
+  "name": "Vantage View - Event Management Agency",
+  "short_name": "Vantage View",
+  "description": "Full-service event management and marketing agency creating unforgettable experiences",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "Vantage_View_Logo.jpeg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "Vantage_View_Logo.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity", "lifestyle"],
+  "lang": "en",
+  "dir": "ltr"
+}
