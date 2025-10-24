@@ -1,0 +1,11 @@
+Contact: mailto:Vantageviewtnt@gmail.com
+Expires: 2025-12-31T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://globalvantageview.com/.well-known/security.txt
+Policy: https://globalvantageview.com/security-policy
+
+# Security Policy
+# If you discover a security vulnerability, please report it to:
+# Email: Vantageviewtnt@gmail.com
+# 
+# We appreciate responsible disclosure and will work with you to resolve any issues.

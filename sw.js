@@ -1,5 +1,14 @@
-const CACHE_NAME = 'vantage-view-v1.4';
+// Service Worker for Vantage View
+// Only works over HTTPS
+
+const CACHE_NAME = 'vantage-view-v1.5';
 const BASE_PATH = '/'; // Custom domain base path
+
+// Ensure we're running over HTTPS
+if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+  console.error('Service Worker requires HTTPS');
+  return;
+}
 
 const urlsToCache = [
   BASE_PATH,

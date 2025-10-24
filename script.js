@@ -648,6 +648,12 @@ function showNotification(message, type) {
 // Service Worker Registration for caching
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
+        // Ensure we're running over HTTPS
+        if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+            console.warn('Service Worker requires HTTPS for production');
+            return;
+        }
+        
         // Detect if running on custom domain or GitHub Pages
         const isCustomDomain = window.location.hostname.includes('globalvantageview.com');
         const swPath = isCustomDomain ? '/sw.js' : '/vantage-view/sw.js';

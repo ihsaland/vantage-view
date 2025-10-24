@@ -8,9 +8,14 @@ Sitemap: https://globalvantageview.com/sitemap.xml
 Disallow: /ALCON Images/
 Disallow: /*.zip
 Disallow: /*.log
+Disallow: /.git/
+Disallow: /.htaccess
 
 # Allow important pages
 Allow: /index.html
 Allow: /gallery.html
 Allow: /styles.css
 Allow: /script.js
+Allow: /manifest.json
+Allow: /sw.js
+Allow: /.well-known/security.txt
