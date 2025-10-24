@@ -511,7 +511,7 @@ document.getElementById('contact-form').addEventListener('submit', function(even
     submitBtn.disabled = true;
     
     // Send email using EmailJS
-    emailjs.send('service_64fyyrn', 'template_iyh9wer', formData)
+    emailjs.send('service_7jiskop', 'template_iyh9wer', formData)
         .then(function(response) {
             console.log('SUCCESS!', response.status, response.text);
             
