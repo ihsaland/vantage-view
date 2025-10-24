@@ -381,7 +381,7 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form id="contact-form">
+                    <form id="contact-form" onsubmit="return false;">
                         <div class="form-group">
                             <input type="text" id="from_name" name="from_name" placeholder="Your Name" required>
                         </div>
@@ -406,6 +406,13 @@
                             <textarea id="message" name="message" placeholder="Tell us about your event" rows="5" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Send Message</button>
+                        <div class="booking-alternative">
+                            <p>Or schedule a consultation:</p>
+                            <button type="button" onclick="openCalendly()" class="btn btn-secondary">
+                                <i class="fas fa-calendar-check"></i>
+                                Book Free Consultation
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>

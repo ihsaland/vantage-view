@@ -274,10 +274,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize intersection observer for animations
     initScrollAnimations();
     
-    // Initialize analytics tracking
-    initAnalytics();
-    
-    // Track gallery interactions if on gallery page
+// Initialize analytics tracking
+initAnalytics();
+
+// Check Calendly loading
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        if (typeof Calendly !== 'undefined') {
+            console.log('Calendly loaded successfully');
+        } else {
+            console.error('Calendly failed to load');
+        }
+    }, 2000); // Wait 2 seconds for Calendly to load
+});
+
+// Track gallery interactions if on gallery page
     if (window.location.pathname.includes('gallery.html')) {
         initGalleryAnalytics();
     }
@@ -489,11 +500,44 @@ function initGalleryAnalytics() {
 (function() {
     // Initialize EmailJS with your Public Key
     emailjs.init("s_Ry3i7Nb2sIrzVlk");
+    console.log('EmailJS initialized with public key: s_Ry3i7Nb2sIrzVlk');
 })();
 
 // Contact Form Handler
-document.getElementById('contact-form').addEventListener('submit', function(event) {
-    event.preventDefault();
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+        // Prevent any form submission
+        contactForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            console.log('Form submitted, preventing default behavior');
+            
+            // Call the email sending function
+            handleFormSubmission();
+            return false;
+        });
+        
+        // Also prevent form submission on button click
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        if (submitButton) {
+            submitButton.addEventListener('click', function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                console.log('Submit button clicked, preventing default behavior');
+                
+                // Call the email sending function
+                handleFormSubmission();
+                return false;
+            });
+        }
+    } else {
+        console.error('Contact form not found');
+    }
+});
+
+// Separate function to handle form submission
+function handleFormSubmission() {
     
     // Get form data
     const formData = {
@@ -510,6 +554,16 @@ document.getElementById('contact-form').addEventListener('submit', function(even
     submitBtn.textContent = 'Sending...';
     submitBtn.disabled = true;
     
+    // Check if EmailJS is loaded
+    if (typeof emailjs === 'undefined') {
+        console.error('EmailJS not loaded');
+        showNotification('Email service not available. Please try again later.', 'error');
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        return;
+    }
+    
+    console.log('Sending email with EmailJS...');
     // Send email using EmailJS
     emailjs.send('service_7jiskop', 'template_iyh9wer', formData)
         .then(function(response) {
@@ -538,7 +592,26 @@ document.getElementById('contact-form').addEventListener('submit', function(even
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
         });
-});
+}
+
+// Calendly Integration
+function openCalendly() {
+    // Track Calendly open event
+    trackEvent('calendly_open', 'Booking', 'Calendar Icon Click');
+    
+    // Check if Calendly is loaded
+    if (typeof Calendly === 'undefined') {
+        console.error('Calendly not loaded');
+        showNotification('Booking service not available. Please try again later.', 'error');
+        return;
+    }
+    
+    console.log('Opening Calendly popup...');
+    // Your actual Calendly username
+    Calendly.initPopupWidget({
+        url: 'https://calendly.com/admin-globalvantageview'
+    });
+}
 
 // Notification System
 function showNotification(message, type) {

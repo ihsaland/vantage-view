@@ -1695,6 +1695,53 @@ html {
     font-size: 0.9rem;
 }
 
+/* Booking Alternative Styles */
+.booking-alternative {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    backdrop-filter: blur(20px);
+}
+
+.booking-alternative p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.booking-alternative .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.booking-alternative .btn i {
+    font-size: 1.1rem;
+}
+
+/* Responsive Booking Alternative */
+@media (max-width: 768px) {
+    .booking-alternative {
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+    
+    .booking-alternative p {
+        font-size: 0.9rem;
+    }
+    
+    .booking-alternative .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
 /* Notification Styles */
 .notification {
     position: fixed;
