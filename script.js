@@ -273,13 +273,20 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize intersection observer for animations
     initScrollAnimations();
+    
+    // Initialize analytics tracking
+    initAnalytics();
+    
+    // Track gallery interactions if on gallery page
+    if (window.location.pathname.includes('gallery.html')) {
+        initGalleryAnalytics();
+    }
 });
 
 // Image Modal Functionality
 let currentImageIndex = 0;
 const imagePaths = [
-    // Initial images from album-d445997216-downloads-pt1
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3170-optimized.jpg',
+    // 12 carefully selected images from the Alcon BPI Clareon Launch (all from album-d445997216-downloads-pt1)
     'ALCON Images/album-d445997216-downloads-pt1/IMGL3171-optimized.jpg',
     'ALCON Images/album-d445997216-downloads-pt1/IMGL3172-optimized.jpg',
     'ALCON Images/album-d445997216-downloads-pt1/IMGL3173-optimized.jpg',
@@ -291,137 +298,7 @@ const imagePaths = [
     'ALCON Images/album-d445997216-downloads-pt1/IMGL3179-optimized.jpg',
     'ALCON Images/album-d445997216-downloads-pt1/IMGL3182-optimized.jpg',
     'ALCON Images/album-d445997216-downloads-pt1/IMGL3183-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3184-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3186-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3191-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3194-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3198-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3201-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3202-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3203-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3207-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3209-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3211-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3212-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3213-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3214-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3215-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3220-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3221-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3224-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3226-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3229-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3233-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3236-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3241-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3242-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3244-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3245-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3248-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3250-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3251-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3254-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3258-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3259-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3260-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3261-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3263-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3264-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3265-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3267-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3268-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3270-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3272-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3274-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3278-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3282-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3283-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3289-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3291-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3292-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3293-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3294-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3296-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3297-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3301-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3305-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3306-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3308-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3313-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3315-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3316-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3318-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3322-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3327-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3330-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3333-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3334-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3335-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3337-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3338-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3339-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3341-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3342-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3346-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3347-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3351-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3353-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3355-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3356-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3359-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3362-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3364-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3373-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3375-optimized.jpg',
-    'ALCON Images/album-d445997216-downloads-pt1/IMGL3377-optimized.jpg',
-    // Additional images from BPI_Clareon_Launch
-    'ALCON Images/BPI_Clareon_Launch/20250703_182139259.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_182330889.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_182836705.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_182854096.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_183000127.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_183022669.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_183052258.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_183214471.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_183414227.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_183654875.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_184029978.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_184706339.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_184719917.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_184925967.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_184947674.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_185043378.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_185103495.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_185325896.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_185456640.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_185517639.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_185549531.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_210832481.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_213158503.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_213221870.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_213243780.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_213421780.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_213453238.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_213520670.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_213640125.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_213805648.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_213902244.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_213930411.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_213945548.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_214018363.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_214108335.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_214303972.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_214338934.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_214606587.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_214631040.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_214828710.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_214904898.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_214936834.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_214947880.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_215019726.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_215307985.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_215321117.jpg',
-    'ALCON Images/BPI_Clareon_Launch/20250703_215348770.jpg'
+    'ALCON Images/album-d445997216-downloads-pt1/IMGL3184-optimized.jpg'
 ];
 
 function openModal(imagePath) {
@@ -495,20 +372,212 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Calendly Integration
-function openCalendly() {
-    // Replace 'your-calendly-username' with your actual Calendly username
-    Calendly.initPopupWidget({
-        url: 'https://calendly.com/vantageviewtnt'
+// Google Analytics Event Tracking
+function trackEvent(eventName, eventCategory, eventLabel, value) {
+    if (typeof gtag !== 'undefined') {
+        gtag('event', eventName, {
+            event_category: eventCategory,
+            event_label: eventLabel,
+            value: value
+        });
+    }
+}
+
+// Track page interactions
+function initAnalytics() {
+    // Track navigation clicks
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function() {
+            trackEvent('navigation_click', 'Navigation', this.textContent.trim());
+        });
     });
+
+    // Track service card clicks
+    document.querySelectorAll('.service-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const serviceName = this.querySelector('h3').textContent.trim();
+            trackEvent('service_view', 'Services', serviceName);
+        });
+    });
+
+    // Track client logo clicks
+    document.querySelectorAll('.client-item').forEach(client => {
+        client.addEventListener('click', function() {
+            const clientName = this.querySelector('img').alt || 'Unknown Client';
+            trackEvent('client_click', 'Clients', clientName);
+        });
+    });
+
+    // Track contact form interactions
+    const contactForm = document.querySelector('#contact form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            trackEvent('form_submit', 'Contact', 'Contact Form');
+        });
+    }
+
+    // Track scroll depth
+    let maxScroll = 0;
+    window.addEventListener('scroll', function() {
+        const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+        if (scrollPercent > maxScroll && scrollPercent % 25 === 0) {
+            maxScroll = scrollPercent;
+            trackEvent('scroll_depth', 'Engagement', `${scrollPercent}%`);
+        }
+    });
+}
+
+// Gallery-specific analytics
+function initGalleryAnalytics() {
+    // Track gallery image clicks
+    document.querySelectorAll('.gallery-item').forEach((item, index) => {
+        item.addEventListener('click', function() {
+            const imageName = this.querySelector('img').src.split('/').pop();
+            trackEvent('gallery_image_click', 'Gallery', imageName, index + 1);
+        });
+    });
+
+    // Track modal interactions
+    const modal = document.getElementById('imageModal');
+    if (modal) {
+        // Track modal open
+        const originalOpenModal = window.openModal;
+        window.openModal = function(imagePath) {
+            const imageName = imagePath.split('/').pop();
+            trackEvent('modal_open', 'Gallery', imageName);
+            originalOpenModal(imagePath);
+        };
+
+        // Track modal navigation
+        const originalChangeImage = window.changeImage;
+        window.changeImage = function(direction) {
+            trackEvent('modal_navigation', 'Gallery', direction > 0 ? 'Next' : 'Previous');
+            originalChangeImage(direction);
+        };
+
+        // Track modal close
+        const originalCloseModal = window.closeModal;
+        window.closeModal = function() {
+            trackEvent('modal_close', 'Gallery', 'Close');
+            originalCloseModal();
+        };
+    }
+
+    // Track gallery scroll depth
+    let galleryScrollDepth = 0;
+    const galleryContainer = document.querySelector('.gallery-grid');
+    if (galleryContainer) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const scrollPercent = Math.round((entry.boundingClientRect.top / window.innerHeight) * 100);
+                    if (scrollPercent > galleryScrollDepth && scrollPercent % 20 === 0) {
+                        galleryScrollDepth = scrollPercent;
+                        trackEvent('gallery_scroll', 'Gallery', `${scrollPercent}%`);
+                    }
+                }
+            });
+        });
+
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            observer.observe(item);
+        });
+    }
+}
+
+// EmailJS Configuration
+(function() {
+    // Initialize EmailJS with your Public Key
+    emailjs.init("s_Ry3i7Nb2sIrzVlk");
+})();
+
+// Contact Form Handler
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    // Get form data
+    const formData = {
+        from_name: document.getElementById('from_name').value,
+        from_email: document.getElementById('from_email').value,
+        company_name: document.getElementById('company_name').value,
+        service_type: document.getElementById('service_type').value,
+        message: document.getElementById('message').value
+    };
+    
+    // Show loading state
+    const submitBtn = document.querySelector('#contact-form button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+    
+    // Send email using EmailJS
+    emailjs.send('service_64fyyrn', 'template_iyh9wer', formData)
+        .then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+            
+            // Show success message
+            showNotification('Message sent successfully! We\'ll get back to you soon.', 'success');
+            
+            // Reset form
+            document.getElementById('contact-form').reset();
+            
+            // Track successful form submission
+            trackEvent('form_submit_success', 'Contact', 'Contact Form');
+            
+        }, function(error) {
+            console.log('FAILED...', error);
+            
+            // Show error message
+            showNotification('Sorry, there was an error sending your message. Please try again.', 'error');
+            
+            // Track failed form submission
+            trackEvent('form_submit_error', 'Contact', 'Contact Form');
+        })
+        .finally(function() {
+            // Reset button state
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        });
+});
+
+// Notification System
+function showNotification(message, type) {
+    // Remove existing notifications
+    const existingNotification = document.querySelector('.notification');
+    if (existingNotification) {
+        existingNotification.remove();
+    }
+    
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+            <span>${message}</span>
+            <button class="notification-close" onclick="this.parentElement.parentElement.remove()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    `;
+    
+    // Add to page
+    document.body.appendChild(notification);
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        if (notification.parentElement) {
+            notification.remove();
+        }
+    }, 5000);
 }
 
 // Service Worker Registration for caching
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        // Detect if running on GitHub Pages
-        const isGitHubPages = window.location.hostname.includes('github.io');
-        const swPath = isGitHubPages ? '/vantage-view/sw.js' : '/sw.js';
+        // Detect if running on custom domain or GitHub Pages
+        const isCustomDomain = window.location.hostname.includes('globalvantageview.com');
+        const swPath = isCustomDomain ? '/sw.js' : '/vantage-view/sw.js';
         
         navigator.serviceWorker.register(swPath)
             .then(registration => {

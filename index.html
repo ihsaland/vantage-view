@@ -12,14 +12,14 @@
     <meta property="og:title" content="Vantage View - Event Management & Marketing Agency">
     <meta property="og:description" content="Creating unforgettable experiences that connect brands with their audiences through strategic planning, creative design, and seamless execution.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ihsaland.github.io/vantage-view/">
-    <meta property="og:image" content="https://ihsaland.github.io/vantage-view/Vantage_View_Logo.jpeg">
+    <meta property="og:url" content="https://globalvantageview.com/">
+    <meta property="og:image" content="https://globalvantageview.com/Vantage_View_Logo.jpeg">
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Vantage View - Event Management & Marketing Agency">
     <meta name="twitter:description" content="Creating unforgettable experiences that connect brands with their audiences.">
-    <meta name="twitter:image" content="https://ihsaland.github.io/vantage-view/Vantage_View_Logo.jpeg">
+    <meta name="twitter:image" content="https://globalvantageview.com/Vantage_View_Logo.jpeg">
     
     <title>Vantage View - Event Management & Marketing Agency</title>
     
@@ -45,9 +45,25 @@
     <!-- Web App Manifest -->
     <link rel="manifest" href="manifest.json">
     
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CWXK8930J5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-CWXK8930J5', {
+            page_title: 'Vantage View - Event Management & Marketing Agency',
+            page_location: window.location.href,
+            send_page_view: true
+        });
+    </script>
+    
     <!-- Calendly Widget -->
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     
     <!-- Theme Color -->
     <meta name="theme-color" content="#000000">
@@ -288,7 +304,6 @@
                             <i class="fas fa-images"></i>
                             View Full Gallery
                         </a>
-                        <p class="gallery-count">+95 more photos</p>
                     </div>
                 </div>
             </div>
@@ -366,18 +381,18 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form>
+                    <form id="contact-form">
                         <div class="form-group">
-                            <input type="text" placeholder="Your Name" required>
+                            <input type="text" id="from_name" name="from_name" placeholder="Your Name" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" placeholder="Your Email" required>
+                            <input type="email" id="from_email" name="from_email" placeholder="Your Email" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" placeholder="Company Name">
+                            <input type="text" id="company_name" name="company_name" placeholder="Company Name">
                         </div>
                         <div class="form-group">
-                            <select required>
+                            <select id="service_type" name="service_type" required>
                                 <option value="">Select Service</option>
                                 <option value="strategy">Event Strategy & Planning</option>
                                 <option value="stage">Stage Management</option>
@@ -388,18 +403,10 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <textarea placeholder="Tell us about your event" rows="5" required></textarea>
+                            <textarea id="message" name="message" placeholder="Tell us about your event" rows="5" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Send Message</button>
                     </form>
-                    <div class="calendly-section">
-                        <h4>Or Schedule a Call</h4>
-                        <p>Book a free consultation to discuss your event needs</p>
-                        <button onclick="openCalendly()" class="btn btn-secondary">
-                            <i class="fas fa-calendar-check"></i>
-                            Book Free Consultation
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>

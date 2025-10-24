@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://ihsaland.github.io/vantage-view/sitemap.xml
+Sitemap: https://globalvantageview.com/sitemap.xml
 
 # Disallow certain directories
 Disallow: /ALCON Images/
