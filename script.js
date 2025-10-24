@@ -274,6 +274,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize intersection observer for animations
     initScrollAnimations();
     
+    // Project gallery will be loaded after imagePaths is defined
+    
 // Initialize analytics tracking
 initAnalytics();
 
@@ -311,6 +313,9 @@ const imagePaths = [
     'ALCON Images/album-d445997216-downloads-pt1/IMGL3183-optimized.jpg',
     'ALCON Images/album-d445997216-downloads-pt1/IMGL3184-optimized.jpg'
 ];
+
+// Load project gallery after imagePaths is defined
+loadProjectGallery();
 
 function openModal(imagePath) {
     const modal = document.getElementById('imageModal');
@@ -504,6 +509,40 @@ function initGalleryAnalytics() {
 })();
 
 // Contact Form Handler
+// Dynamic Project Gallery
+function loadProjectGallery() {
+    const projectGallery = document.getElementById('project-gallery-preview');
+    if (!projectGallery) return;
+    
+    // Create a shuffled copy of the imagePaths array
+    const shuffledImages = [...imagePaths].sort(() => Math.random() - 0.5);
+    
+    // Select first 6 images from the shuffled array
+    const projectImages = shuffledImages.slice(0, 6);
+    
+    // Clear existing content
+    projectGallery.innerHTML = '';
+    
+    // Create gallery items dynamically
+    projectImages.forEach((imagePath, index) => {
+        const galleryItem = document.createElement('div');
+        galleryItem.className = 'gallery-item';
+        galleryItem.onclick = () => openModal(imagePath);
+        
+        galleryItem.innerHTML = `
+            <img src="${imagePath}" alt="Alcon BPI Clareon Launch Event" loading="lazy" width="300" height="300">
+            <div class="gallery-overlay">
+                <i class="fas fa-expand"></i>
+            </div>
+        `;
+        
+        projectGallery.appendChild(galleryItem);
+    });
+    
+    console.log(`Loaded ${projectImages.length} randomized images for project gallery`);
+}
+
+// Initialize project gallery when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
